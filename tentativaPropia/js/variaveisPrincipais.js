@@ -1,7 +1,7 @@
 export let statusCharacter = document.getElementById("containerStats");
 export let xpCharacter = document.querySelector("#xp p");
 export let hpCharacter = document.querySelector("#hp p");
-export let goldCharacter = document.querySelector("#gold p");
+export let goldCharacter = document.querySelector("#gold");
 
 export let weapons = "stick";
 
