@@ -1,3 +1,7 @@
 .esconder{
     display: none;
 }
+
+.MonsterOn{
+    height: 15% !important;  /*arrumar o sistema*/
+}

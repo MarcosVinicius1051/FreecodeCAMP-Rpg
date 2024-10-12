@@ -1,77 +1,46 @@
-import {textosArmazenados as textArmazem} from "./textos.js"
+import {textosArmazenados as textArmazem,weaponsDamege} from "./textos.js"
 import * as variaveis from "./variaveisPrincipais.js"
+import * as btnAction from "./btnActions.js"
+import * as monsterStatus from  "./monsterStatus.js"
 
+function statusETextoIniciais(){
+    variaveis.hpCharacter.innerHTML = '100'
+    variaveis.xpCharacter.innerHTML = '0'
+    variaveis.goldCharacter.innerHTML = '100'
 
-statusIniciais();
+    variaveis.text.innerHTML = textArmazem(0,variaveis.weapons.innerHTML,variaveis.goldCharacter.innerHTML);
+}
 
+statusETextoIniciais();
 
+// store
 
 variaveis.btnVillage.addEventListener("click",((evt)=>{
-    nEsconder(variaveis.btnStore);
-    nEsconder(variaveis.btnCave);
-    nEsconder(variaveis.btnDragon);
-    
-    esconder(variaveis.btnStoreWeapon);
-    esconder(variaveis.btnHpStore);
-    esconder(variaveis.btnVillage); 
-    variaveis.text.innerHTML = textArmazem(1);
+    btnAction.villageBtn();     
 }));
 
 variaveis.btnStore.addEventListener("click",((evt)=>{
-    esconder(variaveis.btnDragon);
-    esconder(variaveis.btnCave);
-    esconder(variaveis.btnStore);
-
-    nEsconder(variaveis.btnStoreWeapon);
-    nEsconder(variaveis.btnHpStore);
-    nEsconder(variaveis.btnVillage);
-
-    variaveis.text.innerHTML = textArmazem(2);
-}))
-
+    btnAction.storeBtn();
+}));
 
 variaveis.btnHpStore.addEventListener("click",((evt)=>{
-    buyItems(parseInt(variaveis.goldCharacter.innerHTML),"hp");
+    btnAction.buyHp();
       
 }))
 
+variaveis.btnStoreWeapon.addEventListener("click",((evt)=>{
+    btnAction.buyWeapon();
+}))
 
 
+// cave 
 
-
-
-variaveis.text.innerHTML = textArmazem(0,variaveis.weapons,variaveis.goldCharacter.innerHTML);
-
-function statusIniciais(){
-variaveis.hpCharacter.innerHTML = '100'
-variaveis.xpCharacter.innerHTML = '0'
-variaveis.goldCharacter.innerHTML = '50'
-}
-
-function esconder(el){
-    return el.classList.add("esconder"); // class com um s xdddddd
-}
-
-function nEsconder(el){
+if(variaveis.containerMonster.classList == "esconder"){
     
-    return el.classList.remove("esconder");
 }
 
-
-function buyItems (gold,type){
-
-    if(type == "hp"){
-        if(gold >=10){
-            variaveis.text.innerHTML = textArmazem(3);
-            gold = gold -10;
-            // adicionar +10 de hp.
-            return variaveis.goldCharacter.innerHTML = gold.toString(); 
-        }else{
-            variaveis.text.innerHTML = textArmazem(4); 
-        }
-    }
-}
-
-
+variaveis.btnCave.addEventListener("click",((evt)=>{
+    btnAction.CaveBtn();
+}))
 
 
