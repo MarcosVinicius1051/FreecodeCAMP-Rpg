@@ -1,16 +1,23 @@
 import * as variaveis from "./variaveisPrincipais.js"
-import {textosArmazenados as textArmazem, weaponsArmazem} from "./textos.js"
+import {textosArmazenados as textArmazem, weaponsArmazem, weaponsDamege} from "./textos.js"
+import { monsterDemage } from "./monsters.js";
 
-//store
+//essenciais
 
 let weaponValueIndex = 0; 
+
+function addClass(name,classe){
+    return name.classList.add(classe);
+}
+function removeClass(name,classe){
+return name.classList.remove(classe);
+}
 
 function esconder(el){
     return el.classList.add("esconder"); 
 }
 
 function nEsconder(el){
-    
     return el.classList.remove("esconder");
 }
 
@@ -19,10 +26,42 @@ function recuperarHp(hp){
     return variaveis.hpCharacter.innerHTML = hp;
 }
 
-function perderHp(){
-
+function perderHp(hp,type,demage){
+    hp = parseInt(hp);
+    if(type == 0){
+        hp = hp-demage;
+        return variaveis.hpCharacter.innerHTML = hp; 
+    }
+    if(type == 1){
+        if(hp-demage < 0){
+            variaveis.monsterHp.innerHTML = '0';
+            return 0;
+        }
+        if(hp>0){
+            hp = hp - demage; 
+            return variaveis.monsterHp.innerHTML = hp;
+        }
+    }
 }
 
+function pagamento(type,gold){
+    console.log(gold)
+    if(type == "slime"){
+        gold = gold+40; 
+        return variaveis.goldCharacter.innerHTML = gold;
+    }
+    if(type == "cano"){
+        gold = gold+80; 
+        return variaveis.goldCharacter.innerHTML = gold;
+    }
+    if(type == "dragon"){
+        gold = gold+200; 
+        return variaveis.goldCharacter.innerHTML = gold;
+    }
+}
+
+
+// store
 function buyItems (gold,type,weapon){
     let hpReturn;
 
@@ -35,7 +74,7 @@ function buyItems (gold,type,weapon){
             
             gold = gold -10;
 
-            return variaveis.goldCharacter.innerHTML = gold.toString(), hpReturn;
+            return variaveis.goldCharacter.innerHTML = gold.toString();
         }else{
             variaveis.text.innerHTML = textArmazem(4); 
         }
@@ -46,8 +85,8 @@ function buyItems (gold,type,weapon){
             gold = gold - 50; 
             compraArmas(weapon);
             console.log(weapon)
-            
-            return variaveis.goldCharacter.innerHTML = gold;
+            variaveis.goldCharacter.innerHTML = gold;
+            return 
 
         }else{
             variaveis.text.innerHTML = textArmazem(4);
@@ -73,7 +112,10 @@ function compraArmas(weapon){
     }
 }
 
+
 export function villageBtn(){
+
+
     nEsconder(variaveis.btnStore);
     nEsconder(variaveis.btnCave);
     nEsconder(variaveis.btnDragon);
@@ -110,26 +152,30 @@ export function buyWeapon(){
     buyItems(parseInt(variaveis.goldCharacter.innerHTML),"weapon",weaponValueIndex);
     if(weaponValueIndex >= 3){
         weaponValueIndex = 3
+        setTimeout(() => {
+            variaveis.text.innerHTML = textArmazem(2);
+            
+        }, 3000);
     }else{
         weaponValueIndex++
+        setTimeout(() => {
+            variaveis.text.innerHTML = textArmazem(2);
+            
+        }, 3000)
     }
-    setTimeout(() => {
-        variaveis.text.innerHTML = textArmazem(2);
-    }, 3000);
+    return weaponsDamege[weaponValueIndex]
+   
+    
 }
 
 // cave 
 
-function addClass(name){
 
-}
-function removeClass(name){
-return name.classList.remove();
-}
+
 export function CaveBtn(){
-
-
-
+    esconder(variaveis.btnAttack);
+    esconder(variaveis.btnRun);
+    esconder(variaveis.btnDodge)
     esconder(variaveis.btnDragon);
     esconder(variaveis.btnCave);
     esconder(variaveis.btnStore);
@@ -140,3 +186,70 @@ export function CaveBtn(){
     
     variaveis.text.innerHTML = textArmazem(9);
 }
+
+
+export function slimeBtn(){
+
+    addClass(variaveis.containeractions,"MonsterOn");
+    removeClass(variaveis.containerMonster,"esconder");
+
+    esconder(variaveis.btnCano);
+    esconder(variaveis.btnSlime);
+    esconder(variaveis.btnVillage); 
+
+    nEsconder(variaveis.btnAttack);
+    nEsconder(variaveis.btnDodge);
+    nEsconder(variaveis.btnRun);
+
+    variaveis.text.innerHTML = textArmazem(10,false,false,"slime")
+}
+
+export function characterAttack(type,demage,monsterDemag){
+    let valHp = perderHp(variaveis.monsterHp.innerHTML,type,demage);
+    if(valHp >0){
+        setTimeout(()=>{
+            monsterAttack(0,monsterDemag); 
+            variaveis.text.innerHTML = textArmazem(13,false,false,false,monsterDemag)
+        },200)
+
+    }
+    if(valHp == 0){
+        variaveis.text.innerHTML = textArmazem(15,false,false,"slime")
+        pagamento(variaveis.monsterName.innerHTML.toString(),parseInt(variaveis.goldCharacter.innerHTML))
+        setTimeout(()=>{
+            CaveBtn() //arrumar esse sistema referente ao design do sistema XD 
+        },3000)
+    }
+}
+
+
+//Monster Attack
+
+function monsterAttack(type,demage){
+    perderHp(variaveis.hpCharacter.innerHTML,type,demage)
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+export function runBtn(){
+    removeClass(variaveis.containeractions,"MonsterOn");
+    addClass(variaveis.containerMonster,"esconder");
+
+    //terminar de fazer sistema de fuga; 
+}
+
+
+

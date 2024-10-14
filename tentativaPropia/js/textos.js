@@ -1,12 +1,13 @@
-
+import * as variaveis from "./variaveisPrincipais.js"
 export let weaponsArmazem = ["graveto","machado","espada Simples","espadaSagrada"];
 export let weaponsDamege = [10,20,40,80]
 
-export function textosArmazenados(num, weapons,gameStatus){
+
+export function textosArmazenados(num,weapons,gold,monster,demage){
 
     const gameTextArmazem = {
 
-        textInitial: `Bem vindo ao RPG MASCULO, sua missão é matar o dragão. \nMas vc esta muito fraco, então comece indo para a loja ou enfrentar monstros mais fracos na caverna!\n\nVocê possui em seu inventario: \nitem: ${weapons} \nouro: ${gameStatus} `,
+        textInitial: `Bem vindo ao RPG MASCULO, sua missão é matar o dragão. \nMas vc esta muito fraco, então comece indo para a loja ou enfrentar monstros mais fracos na caverna!\n\nVocê possui em seu inventario: \nitem: ${weapons} \nouro: ${gold} `,
 
         textVillage: "você esta no centro da vila, para onde vai agora?",
 
@@ -26,17 +27,17 @@ export function textosArmazenados(num, weapons,gameStatus){
 
         textEnterCave: `cuidado, vc esta dentro da caverna! qual monstro vc vai enfrentar?`,
 
-        textCaveSlime: `Um slime apareceu! ataque ou desvie!`,
+        textCavemonster: `Um ${monster} apareceu! ataque ou desvie!`,
 
-        textEffectiveAttackInSlime: "o ataque acertou!, -x de vida do slime",
+        textEffectiveAttackInmMonster: "o ataque acertou!, -x de vida do montro",
 
-        textNoEffectiveAttackInSlime: "O slime desvivou!",
+        textNoEffectiveAttackInMonster: "O slime desvivou!",
 
-        textSlimeCharacterAttack: "O slime te atacou, voce perdeu x de vida! cuidado!",
+        textMonsterCharacterAttack: `O slime te atacou, voce perdeu ${demage} de vida! cuidado!`,
 
-        texSlimeCharacterAttackDodge: "você esquivou do ataque do slime!",
+        texMonsterCharacterAttackDodge: "você esquivou do ataque do slime!",
 
-        textDefeatMonster: "vc matou o monstro! vc ganhou xx moedas!",
+        textDefeatMonster: `vc matou o ${monster}! vc ganhou 40 moedas!`,
 
         textDefeatCharacter: "vc morreu para o monstro... tente novamente..."
 
@@ -65,15 +66,15 @@ export function textosArmazenados(num, weapons,gameStatus){
         case 9: 
         return gameTextArmazem.textEnterCave
         case 10: 
-        return gameTextArmazem.textCaveSlime
+        return gameTextArmazem.textCavemonster
         case 11: 
-        return gameTextArmazem.textEffectiveAttackInSlime
+        return gameTextArmazem.textEffectiveAttackInmMonster
         case 12: 
-        return gameTextArmazem.textNoEffectiveAttackInSlime
+        return gameTextArmazem.textNoEffectiveAttackInMonster
         case 13: 
-        return gameTextArmazem.textSlimeCharacterAttack
+        return gameTextArmazem.textMonsterCharacterAttack
         case 14: 
-        return gameTextArmazem.texSlimeCharacterAttackDodge
+        return gameTextArmazem.texMonsterCharacterAttackDodge
         case 15: 
         return gameTextArmazem.textDefeatMonster
         case 16: 

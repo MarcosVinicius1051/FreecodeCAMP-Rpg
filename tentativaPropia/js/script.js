@@ -1,12 +1,16 @@
 import {textosArmazenados as textArmazem,weaponsDamege} from "./textos.js"
 import * as variaveis from "./variaveisPrincipais.js"
 import * as btnAction from "./btnActions.js"
-import * as monsterStatus from  "./monsterStatus.js"
+import * as monster from  "./monsters.js"
+import * as danos from "./danos.js"
 
+export let demageCharacter; 
+let monsterAtivo; 
 function statusETextoIniciais(){
     variaveis.hpCharacter.innerHTML = '100'
     variaveis.xpCharacter.innerHTML = '0'
     variaveis.goldCharacter.innerHTML = '100'
+    demageCharacter = 20; 
 
     variaveis.text.innerHTML = textArmazem(0,variaveis.weapons.innerHTML,variaveis.goldCharacter.innerHTML);
 }
@@ -29,18 +33,29 @@ variaveis.btnHpStore.addEventListener("click",((evt)=>{
 }))
 
 variaveis.btnStoreWeapon.addEventListener("click",((evt)=>{
-    btnAction.buyWeapon();
+    demageCharacter = btnAction.buyWeapon();
+    console.log(demageCharacter);
 }))
 
 
 // cave 
 
-if(variaveis.containerMonster.classList == "esconder"){
-    
-}
 
 variaveis.btnCave.addEventListener("click",((evt)=>{
     btnAction.CaveBtn();
 }))
+
+variaveis.btnSlime.addEventListener("click",((evt)=>{
+    btnAction.slimeBtn();
+    monsterAtivo = monster.statusMonster("slime");
+}));
+variaveis.btnAttack.addEventListener("click",((evt)=>{
+    btnAction.characterAttack(1,danos.demageCalculator(demageCharacter),danos.demageCalculator(monsterAtivo));
+}))
+
+
+variaveis.btnRun.addEventListener("click",((evt)=>{
+    btnAction.runBtn();
+}));
 
 
