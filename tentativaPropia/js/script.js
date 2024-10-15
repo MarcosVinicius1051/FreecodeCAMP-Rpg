@@ -4,9 +4,12 @@ import * as btnAction from "./btnActions.js"
 import * as monster from  "./monsters.js"
 import * as danos from "./danos.js"
 
+
 export let demageCharacter; 
-let monsterAtivo; 
-function statusETextoIniciais(){
+let monsterAtivoDemage; 
+let monsterAtivoName;
+
+export function statusETextoInicial(){
     variaveis.hpCharacter.innerHTML = '100'
     variaveis.xpCharacter.innerHTML = '0'
     variaveis.goldCharacter.innerHTML = '100'
@@ -15,7 +18,7 @@ function statusETextoIniciais(){
     variaveis.text.innerHTML = textArmazem(0,variaveis.weapons.innerHTML,variaveis.goldCharacter.innerHTML);
 }
 
-statusETextoIniciais();
+statusETextoInicial();
 
 // store
 
@@ -45,16 +48,30 @@ variaveis.btnCave.addEventListener("click",((evt)=>{
     btnAction.CaveBtn();
 }))
 
+//monsters
 variaveis.btnSlime.addEventListener("click",((evt)=>{
-    btnAction.slimeBtn();
-    monsterAtivo = monster.statusMonster("slime");
+    monsterAtivoName=btnAction.slimeBtn();
+    monsterAtivoDemage = monster.statusMonster("slime");
 }));
+
+variaveis.btnCano.addEventListener("click",((evt)=>{
+    monsterAtivoName=btnAction.canoBtn();
+    monsterAtivoDemage = monster.statusMonster("cano");
+}));
+
+variaveis.btnDragon.addEventListener("click",((evt)=>{
+    monsterAtivoName=btnAction.dragonBtn();
+    monsterAtivoDemage = monster.statusMonster("dragon");
+}));
+
+
 variaveis.btnAttack.addEventListener("click",((evt)=>{
-    btnAction.characterAttack(1,danos.demageCalculator(demageCharacter),danos.demageCalculator(monsterAtivo));
+    btnAction.characterAttack(1, danos.demageCalculator(demageCharacter), danos.demageCalculator(monsterAtivoDemage), monsterAtivoName);
 }))
 
 
 variaveis.btnRun.addEventListener("click",((evt)=>{
+    
     btnAction.runBtn();
 }));
 

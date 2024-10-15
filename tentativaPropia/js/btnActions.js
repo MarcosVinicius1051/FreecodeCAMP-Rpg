@@ -1,155 +1,48 @@
-import * as variaveis from "./variaveisPrincipais.js"
-import {textosArmazenados as textArmazem, weaponsArmazem, weaponsDamege} from "./textos.js"
-import { monsterDemage } from "./monsters.js";
-
+import * as variaveis from "./variaveisPrincipais.js";
+import {textosArmazenados as textArmazem, weaponsArmazem, weaponsDamege} from "./textos.js";
+import * as essencial from "./essentialFunctions.js";
+import * as script from './script.js';
 //essenciais
 
 let weaponValueIndex = 0; 
 
-function addClass(name,classe){
-    return name.classList.add(classe);
-}
-function removeClass(name,classe){
-return name.classList.remove(classe);
-}
-
-function esconder(el){
-    return el.classList.add("esconder"); 
-}
-
-function nEsconder(el){
-    return el.classList.remove("esconder");
-}
-
-function recuperarHp(hp){
-    hp = hp+10; 
-    return variaveis.hpCharacter.innerHTML = hp;
-}
-
-function perderHp(hp,type,demage){
-    hp = parseInt(hp);
-    if(type == 0){
-        hp = hp-demage;
-        return variaveis.hpCharacter.innerHTML = hp; 
-    }
-    if(type == 1){
-        if(hp-demage < 0){
-            variaveis.monsterHp.innerHTML = '0';
-            return 0;
-        }
-        if(hp>0){
-            hp = hp - demage; 
-            return variaveis.monsterHp.innerHTML = hp;
-        }
-    }
-}
-
-function pagamento(type,gold){
-    console.log(gold)
-    if(type == "slime"){
-        gold = gold+40; 
-        return variaveis.goldCharacter.innerHTML = gold;
-    }
-    if(type == "cano"){
-        gold = gold+80; 
-        return variaveis.goldCharacter.innerHTML = gold;
-    }
-    if(type == "dragon"){
-        gold = gold+200; 
-        return variaveis.goldCharacter.innerHTML = gold;
-    }
-}
-
-
-// store
-function buyItems (gold,type,weapon){
-    let hpReturn;
-
-    if(type == "hp"){
-        if(gold >=10){
-
-            hpReturn = recuperarHp(parseInt(variaveis.hpCharacter.innerHTML));
-
-            variaveis.text.innerHTML = textArmazem(3);
-            
-            gold = gold -10;
-
-            return variaveis.goldCharacter.innerHTML = gold.toString();
-        }else{
-            variaveis.text.innerHTML = textArmazem(4); 
-        }
-    }
-
-    if(type == "weapon"){
-        if(gold>=50){
-            gold = gold - 50; 
-            compraArmas(weapon);
-            console.log(weapon)
-            variaveis.goldCharacter.innerHTML = gold;
-            return 
-
-        }else{
-            variaveis.text.innerHTML = textArmazem(4);
-        }
-    }
-}
-
-function compraArmas(weapon){
-
-    switch (weapon){
-        case 0:
-            variaveis.text.innerHTML = textArmazem(5);
-            return variaveis.weapons.innerHTML = weaponsArmazem[1];
-        case 1: 
-            variaveis.text.innerHTML = textArmazem(6);
-            return variaveis.weapons.innerHTML = weaponsArmazem[2]; 
-        case 2: 
-            variaveis.text.innerHTML = textArmazem(7);  
-            return variaveis.weapons.innerHTML = weaponsArmazem[3];
-        case 3: 
-            variaveis.text.innerHTML = textArmazem(8);
-            return variaveis.weapons.innerHTML = weaponsArmazem[3];
-    }
-}
-
-
 export function villageBtn(){
-
-
-    nEsconder(variaveis.btnStore);
-    nEsconder(variaveis.btnCave);
-    nEsconder(variaveis.btnDragon);
+    essencial.nEsconder(variaveis.btnStore);
+    essencial.nEsconder(variaveis.btnCave);
+    essencial.nEsconder(variaveis.btnDragon);
     
-    esconder(variaveis.btnStoreWeapon);
-    esconder(variaveis.btnHpStore);
-    esconder(variaveis.btnVillage); 
-    esconder(variaveis.btnCano);
-    esconder(variaveis.btnSlime)
+    essencial.esconder(variaveis.btnStoreWeapon);
+    essencial.esconder(variaveis.btnHpStore);
+    essencial.esconder(variaveis.btnVillage); 
+    essencial.esconder(variaveis.btnCano);
+    essencial.esconder(variaveis.btnSlime);
 
     variaveis.text.innerHTML = textArmazem(1);
 }
 
 export function storeBtn(){
-    esconder(variaveis.btnDragon);
-    esconder(variaveis.btnCave);
-    esconder(variaveis.btnStore);
+    essencial.esconder(variaveis.btnDragon);
+    essencial.esconder(variaveis.btnCave);
+    essencial.esconder(variaveis.btnStore);
 
-    nEsconder(variaveis.btnStoreWeapon);
-    nEsconder(variaveis.btnHpStore);
-    nEsconder(variaveis.btnVillage);
+    essencial.nEsconder(variaveis.btnStoreWeapon);
+    essencial.nEsconder(variaveis.btnHpStore);
+    essencial.nEsconder(variaveis.btnVillage);
 
     variaveis.text.innerHTML = textArmazem(2);
 }
 
 export function buyHp(){
-    buyItems(parseInt(variaveis.goldCharacter.innerHTML),"hp");
+    essencial.buyItems(parseInt(variaveis.goldCharacter.innerHTML),"hp");
     setTimeout(()=>{
         variaveis.text.innerHTML = textArmazem(2);
     },3000)
 }
 
 export function buyWeapon(){
-    buyItems(parseInt(variaveis.goldCharacter.innerHTML),"weapon",weaponValueIndex);
+    weaponValueIndex = essencial.buyItems(parseInt(variaveis.goldCharacter.innerHTML),"weapon",weaponValueIndex);
+ console.log(weaponValueIndex )
+
     if(weaponValueIndex >= 3){
         weaponValueIndex = 3
         setTimeout(() => {
@@ -157,13 +50,14 @@ export function buyWeapon(){
             
         }, 3000);
     }else{
-        weaponValueIndex++
+ 
+        
         setTimeout(() => {
             variaveis.text.innerHTML = textArmazem(2);
             
         }, 3000)
     }
-    return weaponsDamege[weaponValueIndex]
+    return weaponsDamege[weaponValueIndex] 
    
     
 }
@@ -173,51 +67,106 @@ export function buyWeapon(){
 
 
 export function CaveBtn(){
-    esconder(variaveis.btnAttack);
-    esconder(variaveis.btnRun);
-    esconder(variaveis.btnDodge)
-    esconder(variaveis.btnDragon);
-    esconder(variaveis.btnCave);
-    esconder(variaveis.btnStore);
 
-    nEsconder(variaveis.btnSlime);
-    nEsconder(variaveis.btnCano);
-    nEsconder(variaveis.btnVillage);
+    essencial.removeClass(variaveis.containeractions,"MonsterOn")
+
+    essencial.esconder(variaveis.btnAttack);
+    essencial.esconder(variaveis.btnRun);
+    essencial.esconder(variaveis.btnDodge);
+    essencial.esconder(variaveis.btnDragon);
+    essencial.esconder(variaveis.btnCave);
+    essencial.esconder(variaveis.btnStore);
+    essencial.esconder(variaveis.containerMonster);
+
+    essencial.nEsconder(variaveis.btnSlime);
+    essencial.nEsconder(variaveis.btnCano);
+    essencial.nEsconder(variaveis.btnVillage);
     
     variaveis.text.innerHTML = textArmazem(9);
 }
 
 
 export function slimeBtn(){
+    
+    essencial.addClass(variaveis.containeractions,"MonsterOn");
+    
+    essencial.esconder(variaveis.btnCano);
+    essencial.esconder(variaveis.btnSlime);
+    essencial.esconder(variaveis.btnVillage); 
 
-    addClass(variaveis.containeractions,"MonsterOn");
-    removeClass(variaveis.containerMonster,"esconder");
-
-    esconder(variaveis.btnCano);
-    esconder(variaveis.btnSlime);
-    esconder(variaveis.btnVillage); 
-
-    nEsconder(variaveis.btnAttack);
-    nEsconder(variaveis.btnDodge);
-    nEsconder(variaveis.btnRun);
+    essencial.nEsconder(variaveis.containerMonster);
+    essencial.nEsconder(variaveis.btnAttack);
+    essencial.nEsconder(variaveis.btnDodge);
+    essencial.nEsconder(variaveis.btnRun);
 
     variaveis.text.innerHTML = textArmazem(10,false,false,"slime")
+
+    return "slime"
+}
+export function canoBtn(){
+    
+    essencial.addClass(variaveis.containeractions,"MonsterOn");
+    
+    essencial.esconder(variaveis.btnCano);
+    essencial.esconder(variaveis.btnSlime);
+    essencial.esconder(variaveis.btnVillage); 
+
+    essencial.nEsconder(variaveis.containerMonster);
+    essencial.nEsconder(variaveis.btnAttack);
+    essencial.nEsconder(variaveis.btnDodge);
+    essencial.nEsconder(variaveis.btnRun);
+
+    variaveis.text.innerHTML = textArmazem(10,false,false,"cano")
+
+    return "cano"
+}
+export function dragonBtn(){
+    
+    essencial.addClass(variaveis.containeractions,"MonsterOn");
+    
+    essencial.esconder(variaveis.btnCano);
+    essencial.esconder(variaveis.btnSlime);
+    essencial.esconder(variaveis.btnVillage); 
+
+    essencial.nEsconder(variaveis.containerMonster);
+    essencial.nEsconder(variaveis.btnAttack);
+    essencial.nEsconder(variaveis.btnDodge);
+    essencial.nEsconder(variaveis.btnRun);
+
+    variaveis.text.innerHTML = textArmazem(10,false,false,"dragon")
+
+    return "dragon"
 }
 
-export function characterAttack(type,demage,monsterDemag){
-    let valHp = perderHp(variaveis.monsterHp.innerHTML,type,demage);
+//arrumar sistema de hp do jogador, para quando morrer o jogo reiniciar.
+
+export function characterAttack(type,demage,monsterDemag,monsterAtivoName){
+    console.log(monsterAtivoName)
+    let valHp = essencial.perderHp(variaveis.monsterHp.innerHTML,type,demage);
+
     if(valHp >0){
         setTimeout(()=>{
-            monsterAttack(0,monsterDemag); 
-            variaveis.text.innerHTML = textArmazem(13,false,false,false,monsterDemag)
+            variaveis.text.innerHTML = textArmazem(13,false,false,monsterAtivoName,monsterDemag)
+        
+            monsterAttack(0,monsterDemag,monsterAtivoName); 
         },200)
-
     }
     if(valHp == 0){
-        variaveis.text.innerHTML = textArmazem(15,false,false,"slime")
-        pagamento(variaveis.monsterName.innerHTML.toString(),parseInt(variaveis.goldCharacter.innerHTML))
+        variaveis.text.innerHTML = textArmazem(15,false,false,monsterAtivoName)
+        essencial.pagamento(variaveis.monsterName.innerHTML.toString(),parseInt(variaveis.goldCharacter.innerHTML));
+
+            variaveis.btnAttack.disabled = true;
+            variaveis.btnDodge.disabled = true;
+            variaveis.btnRun.disabled = true; 
+
         setTimeout(()=>{
+
+            variaveis.btnAttack.disabled = false; 
+            variaveis.btnDodge.disabled = false;
+            variaveis.btnRun.disabled = false; 
+            
             CaveBtn() //arrumar esse sistema referente ao design do sistema XD 
+
         },3000)
     }
 }
@@ -225,28 +174,29 @@ export function characterAttack(type,demage,monsterDemag){
 
 //Monster Attack
 
-function monsterAttack(type,demage){
-    perderHp(variaveis.hpCharacter.innerHTML,type,demage)
+function monsterAttack(type,demage,name){
+    let hpReturnPlayer = essencial.perderHp(variaveis.hpCharacter.innerHTML,type,demage,name);
+    if(hpReturnPlayer<0){
+            setTimeout ((evt)=>{
+                
+                script.statusETextoInicial();
+
+                essencial.removeClass(variaveis.containeractions,"MonsterOn");
+                essencial.addClass(variaveis.containerMonster,"esconder");
+                essencial.esconder(variaveis.btnAttack);
+                essencial.esconder(variaveis.btnRun);
+                essencial.esconder(variaveis.btnDodge);
+
+                essencial.nEsconder(variaveis.btnVillage);
+            },5000);
+    }
 }
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 export function runBtn(){
-    removeClass(variaveis.containeractions,"MonsterOn");
-    addClass(variaveis.containerMonster,"esconder");
+    essencial.removeClass(variaveis.containeractions,"MonsterOn");
+    essencial.addClass(variaveis.containerMonster,"esconder");
 
     //terminar de fazer sistema de fuga; 
 }

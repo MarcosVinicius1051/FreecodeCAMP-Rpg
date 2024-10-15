@@ -1,5 +1,4 @@
 
-
 export function demageCalculator(demage){
 
     let val  = Math.floor(Math.random() * 5);

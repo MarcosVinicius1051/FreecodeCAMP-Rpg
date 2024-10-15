@@ -33,13 +33,13 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
 
         textNoEffectiveAttackInMonster: "O slime desvivou!",
 
-        textMonsterCharacterAttack: `O slime te atacou, voce perdeu ${demage} de vida! cuidado!`,
+        textMonsterCharacterAttack: `O ${monster} te atacou, voce perdeu ${demage} de vida! cuidado!`,
 
         texMonsterCharacterAttackDodge: "você esquivou do ataque do slime!",
 
         textDefeatMonster: `vc matou o ${monster}! vc ganhou 40 moedas!`,
 
-        textDefeatCharacter: "vc morreu para o monstro... tente novamente..."
+        textDefeatCharacter: `vc morreu para o ${monster} tente novamente...`
 
 
     }

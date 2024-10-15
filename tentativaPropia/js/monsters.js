@@ -1,6 +1,4 @@
-import {textosArmazenados as textArmazem,weaponsDamege} from "./textos.js"
 import * as variaveis from "./variaveisPrincipais.js"
-import * as btnAction from "./btnActions.js"
 
 export let monsterDemage;
 
@@ -9,6 +7,16 @@ export function statusMonster(monsterName){
         variaveis.monsterName.innerHTML = monsterName;
         variaveis.monsterHp.innerHTML = 100; 
         return monsterDemage = 20; 
+    }
+    if(monsterName == "cano"){
+        variaveis.monsterName.innerHTML = monsterName;
+        variaveis.monsterHp.innerHTML = 200; 
+        return monsterDemage = 30; 
+    }
+    if(monsterName == "dragon"){
+        variaveis.monsterName.innerHTML = monsterName;
+        variaveis.monsterHp.innerHTML = 500; 
+        return monsterDemage = 50; 
     }
 }
 
