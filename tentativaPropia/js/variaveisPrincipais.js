@@ -1,12 +1,12 @@
 export let statusCharacter = document.getElementById("containerStats");
 export let xpCharacter = document.querySelector("#xp p");
 export let hpCharacter = document.querySelector("#hp p");
-export let goldCharacter = document.querySelector("#gold");
+export let goldCharacter = document.querySelector("#gold p");
 
 
 export let weapons = document.getElementById("weapon");
 
-export let text = document.querySelector("#text");
+export let text = document.querySelector("#text p");
 
 export let containerMonster = document.querySelector("#containerMonsterBattle");
 export let monsterName =  document.querySelector("#monsterName p");
@@ -15,7 +15,7 @@ export let monsterHp =  document.querySelector("#monsterHp p");
 
 export let containeractions = document.querySelector(".containerGameActions");
 
-
+export let btnExplore = document.querySelector(".exploreCave")
 export let btnStore = document.querySelector(".store")
 export let btnStoreWeapon = document.querySelector(".weaponStore");
 export let btnHpStore = document.querySelector(".hpStore");

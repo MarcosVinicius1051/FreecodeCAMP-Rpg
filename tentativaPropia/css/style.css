@@ -2,6 +2,9 @@
     margin: 0; 
     padding: 0;
 }
+body{
+    background-color: rgb(52 52 52);
+}
 #game{
     width: 100%;
     height: 100vh;
@@ -12,7 +15,8 @@
     #gameContainer{
         width: 60%;
         height: 60vh;
-        border: 1px solid black;
+        
+        background-color: #190021;
 
         display: flex;
         flex-direction: column;
@@ -20,18 +24,24 @@
     }
     #containerStats{
         
-        width: 100%;
-        height: 10%;
-        background-color: bisque;
+        margin-top: 10px;
+        width: 80%;
+        height: 8%;
 
+        border: 3px solid rgb(86, 86, 86,0.5);
+        border-radius: 10px;
+        background-color: #310042;
+
+        align-self: center;
 
         display: flex;
-        justify-content: start;
+        justify-content: center;
         align-items: center;
         gap: 10px;
         
     }
         #containerStats div{
+            color: white;
             margin-left: 20px;
             gap: 5px;
             display: flex;
@@ -40,33 +50,82 @@
         }
     .containerGameActions{
         width: 100%;
-        height: 30%;
-        background-color: chocolate;
+        height: 20%;
+       
 
         display: flex; 
-        justify-content: start;
+        justify-content: center;
         align-items: center;
         gap: 30px;
     }
+
+        .btn{
+            background-color: #b37d01;
+            border: 1px solid #b37d01;
+            border-radius: 10px;
+            color: rgb(209, 209, 209);
+
+            width: 120px;
+            height: 70%;
+        }
     #containerMonsterBattle{
         width: 100%;
-        height: 15%;
+        height: 10%;
         background-color: cornflowerblue;
     }   
         #monsterStats{
             width: 100%;
             height: 100%;
-            background-color: red;
+            background-color: #6e1b00;
 
             display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-evenly;
+            align-items: center;
             gap: 20px;
         }
+            #monsterName{
+                display: flex;
+                color: white;
+                gap: 10px;
+            }
+            #monsterHp{
+                display: flex;
+                color: white;
+                gap: 10px;
+            }
+
     #containerText{
-        width: 100%;
-        height: 60%;
-        background-color: aquamarine;
+        margin-bottom: 10px;
+        width: 90%;
+        height: 50%;
+        background-color: rgb(38, 0, 110);
+
+        align-self: center;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
         #containerText div{
-            width: 100%;
-            height: 100%;
+            width: 94%;
+            height: 80%;
+            background-color: rgb(38, 0, 110);
+            border: 4px solid rgba(0, 0, 0);
+            
+            
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        #containerText div p{
+            
+            margin-top: 25px;
+            width: 90%;
+            height: 90%;
+
+            font-size: 18px;
+            text-align: center;
+            text-wrap: balance;
+            color: white;   
         }

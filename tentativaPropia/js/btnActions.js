@@ -7,10 +7,12 @@ import * as script from './script.js';
 let weaponValueIndex = 0; 
 
 export function villageBtn(){
+    
     essencial.nEsconder(variaveis.btnStore);
     essencial.nEsconder(variaveis.btnCave);
     essencial.nEsconder(variaveis.btnDragon);
-    
+
+    essencial.esconder(variaveis.btnExplore)
     essencial.esconder(variaveis.btnStoreWeapon);
     essencial.esconder(variaveis.btnHpStore);
     essencial.esconder(variaveis.btnVillage); 
@@ -67,7 +69,7 @@ export function buyWeapon(){
 
 
 export function CaveBtn(){
-
+    essencial.xpAdd("")
     essencial.removeClass(variaveis.containeractions,"MonsterOn")
 
     essencial.esconder(variaveis.btnAttack);
@@ -78,6 +80,7 @@ export function CaveBtn(){
     essencial.esconder(variaveis.btnStore);
     essencial.esconder(variaveis.containerMonster);
 
+    essencial.nEsconder(variaveis.btnExplore)
     essencial.nEsconder(variaveis.btnSlime);
     essencial.nEsconder(variaveis.btnCano);
     essencial.nEsconder(variaveis.btnVillage);
@@ -85,11 +88,22 @@ export function CaveBtn(){
     variaveis.text.innerHTML = textArmazem(9);
 }
 
+export function exploreCave(){
+
+    variaveis.btnExplore.disabled = true
+    variaveis.btnCano.disabled = true
+    variaveis.btnSlime.disabled = true
+    variaveis.btnVillage.disabled = true
+
+    essencial.loading(textArmazem(18),0,0,variaveis.hpCharacter.innerHTML)
+
+}
 
 export function slimeBtn(){
     
     essencial.addClass(variaveis.containeractions,"MonsterOn");
-    
+
+    essencial.esconder(variaveis.btnExplore)
     essencial.esconder(variaveis.btnCano);
     essencial.esconder(variaveis.btnSlime);
     essencial.esconder(variaveis.btnVillage); 
@@ -106,7 +120,8 @@ export function slimeBtn(){
 export function canoBtn(){
     
     essencial.addClass(variaveis.containeractions,"MonsterOn");
-    
+
+    essencial.esconder(variaveis.btnExplore)
     essencial.esconder(variaveis.btnCano);
     essencial.esconder(variaveis.btnSlime);
     essencial.esconder(variaveis.btnVillage); 
@@ -127,6 +142,9 @@ export function dragonBtn(){
     essencial.esconder(variaveis.btnCano);
     essencial.esconder(variaveis.btnSlime);
     essencial.esconder(variaveis.btnVillage); 
+    essencial.esconder(variaveis.btnCave)
+    essencial.esconder(variaveis.btnStore);
+    essencial.esconder(variaveis.btnDragon)
 
     essencial.nEsconder(variaveis.containerMonster);
     essencial.nEsconder(variaveis.btnAttack);
@@ -144,13 +162,6 @@ export function characterAttack(type,demage,monsterDemag,monsterAtivoName){
     console.log(monsterAtivoName)
     let valHp = essencial.perderHp(variaveis.monsterHp.innerHTML,type,demage);
 
-    if(valHp >0){
-        setTimeout(()=>{
-            variaveis.text.innerHTML = textArmazem(13,false,false,monsterAtivoName,monsterDemag)
-        
-            monsterAttack(0,monsterDemag,monsterAtivoName); 
-        },200)
-    }
     if(valHp == 0){
         variaveis.text.innerHTML = textArmazem(15,false,false,monsterAtivoName)
         essencial.pagamento(variaveis.monsterName.innerHTML.toString(),parseInt(variaveis.goldCharacter.innerHTML));
@@ -169,6 +180,16 @@ export function characterAttack(type,demage,monsterDemag,monsterAtivoName){
 
         },3000)
     }
+
+    if(valHp >0){
+        setTimeout(()=>{
+            essencial.xpAdd("attack");
+            variaveis.text.innerHTML = textArmazem(13,false,false,monsterAtivoName,monsterDemag)
+        
+            monsterAttack(0,monsterDemag,monsterAtivoName); 
+        },200)
+    }
+    
 }
 
 
@@ -176,9 +197,19 @@ export function characterAttack(type,demage,monsterDemag,monsterAtivoName){
 
 function monsterAttack(type,demage,name){
     let hpReturnPlayer = essencial.perderHp(variaveis.hpCharacter.innerHTML,type,demage,name);
-    if(hpReturnPlayer<0){
-            setTimeout ((evt)=>{
+    if(hpReturnPlayer<=0){
+            variaveis.btnAttack.disabled = true;
+            variaveis.btnDodge.disabled = true;
+            variaveis.btnRun.disabled = true;
+            setTimeout(()=>{
+                variaveis.text.innerHTML = textArmazem(24)  
+            },2000)
                 
+             
+            setTimeout ((evt)=>{
+                variaveis.btnAttack.disabled = false;
+                variaveis.btnDodge.disabled = false;
+                variaveis.btnRun.disabled = false;
                 script.statusETextoInicial();
 
                 essencial.removeClass(variaveis.containeractions,"MonsterOn");
@@ -188,17 +219,58 @@ function monsterAttack(type,demage,name){
                 essencial.esconder(variaveis.btnDodge);
 
                 essencial.nEsconder(variaveis.btnVillage);
-            },5000);
+            },6000);
+    }
+}
+
+export function btnDodge(monsterDemage,monsterAtivoName){
+    let val  = Math.floor(Math.random() * 11);
+    console.log(`valor: ${val}`)
+    if(val%2 == 0){
+        essencial.xpAdd("dodge")
+         variaveis.text.innerHTML = textArmazem(22,false,false, monsterAtivoName);
+    }else{
+        setTimeout(() => {
+            monsterAttack(0,monsterDemage,monsterAtivoName); 
+            variaveis.text.innerHTML = textArmazem(23,false,false,monsterAtivoName,monsterDemage);
+        }, 400);
     }
 }
 
 
 
-export function runBtn(){
+export function runBtn(monsterName){
     essencial.removeClass(variaveis.containeractions,"MonsterOn");
     essencial.addClass(variaveis.containerMonster,"esconder");
 
-    //terminar de fazer sistema de fuga; 
+    variaveis.btnAttack.disabled = true;
+    variaveis.btnDodge.disabled = true;
+    variaveis.btnRun.disabled = true;
+
+    variaveis.text.innerHTML = textArmazem(17,false,false,monsterName)
+    setTimeout((evt)=>{
+
+        variaveis.btnAttack.disabled = false;
+        variaveis.btnDodge.disabled = false;
+        variaveis.btnRun.disabled =false;
+    
+
+        essencial.esconder(variaveis.btnAttack);
+        essencial.esconder(variaveis.btnDodge);
+        essencial.esconder(variaveis.btnRun);
+    
+        essencial.nEsconder(variaveis.btnExplore)
+        essencial.nEsconder(variaveis.btnSlime);
+        essencial.nEsconder(variaveis.btnCano);
+        essencial.nEsconder(variaveis.btnVillage);
+
+        variaveis.text.innerHTML = textArmazem(9);
+
+    },2000)
+    
+
+
+ 
 }
 
 

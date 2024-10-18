@@ -31,7 +31,7 @@ variaveis.btnStore.addEventListener("click",((evt)=>{
 }));
 
 variaveis.btnHpStore.addEventListener("click",((evt)=>{
-    btnAction.buyHp();
+    btnAction.buyHp("caveExplorate");
       
 }))
 
@@ -46,6 +46,10 @@ variaveis.btnStoreWeapon.addEventListener("click",((evt)=>{
 
 variaveis.btnCave.addEventListener("click",((evt)=>{
     btnAction.CaveBtn();
+}))
+
+variaveis.btnExplore.addEventListener("click",((evt)=>{
+    btnAction.exploreCave();
 }))
 
 //monsters
@@ -69,10 +73,14 @@ variaveis.btnAttack.addEventListener("click",((evt)=>{
     btnAction.characterAttack(1, danos.demageCalculator(demageCharacter), danos.demageCalculator(monsterAtivoDemage), monsterAtivoName);
 }))
 
+variaveis.btnDodge.addEventListener("click",((evt)=>{
+    btnAction.btnDodge(danos.demageCalculator(monsterAtivoDemage), monsterAtivoName);
+}))
 
 variaveis.btnRun.addEventListener("click",((evt)=>{
     
-    btnAction.runBtn();
-}));
+    btnAction.runBtn(monsterAtivoName);
+}));    
+
 
 

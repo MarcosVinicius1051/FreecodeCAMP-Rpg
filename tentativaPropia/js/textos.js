@@ -25,7 +25,7 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
 
         textBuyNoWeapon: `infelizmente não há mais armas para comprar!`,
 
-        textEnterCave: `cuidado, vc esta dentro da caverna! qual monstro vc vai enfrentar?`,
+        textEnterCave: `cuidado, vc esta dentro da caverna! qual monstro vc vai enfrentar? Ou ira tentar explorar a caverna?`,
 
         textCavemonster: `Um ${monster} apareceu! ataque ou desvie!`,
 
@@ -39,7 +39,25 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
 
         textDefeatMonster: `vc matou o ${monster}! vc ganhou 40 moedas!`,
 
-        textDefeatCharacter: `vc morreu para o ${monster} tente novamente...`
+        textDefeatCharacter: `vc morreu para o ${monster}.`,
+
+        textRunCharacter: `vc fugiu do ${monster}`,
+
+        textExploreCave: `Você esta explorando a caverna, cuidado com armadilhas! `,
+
+        textExploreCaveLoading: `explorando`,
+
+        textExploreCaveGold: `vc achou um bau do tesouro! você ganhou 60 de ouro`,
+
+        textExploreCaveHp: `você caiu em uma armadilha! você perdeu 30hp`,
+
+        textExploreCaveNothing: `você explorou a caverna... mas não achou nada`,
+
+        textDodgeTrue: `você desviou do ataque do ${monster}`,
+
+        textDodgeFalse: `você não conseguiu desviar do ataque do ${monster}, você perdeu ${demage}hp`,
+
+        textTotalXp: `seu xp total foi: ${variaveis.xpCharacter.innerHTML}! Tente novamente em uma nova jornada!`
 
 
     }
@@ -79,6 +97,21 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
         return gameTextArmazem.textDefeatMonster
         case 16: 
         return gameTextArmazem.textDefeatCharacter
-
+        case 17: 
+        return gameTextArmazem.textRunCharacter
+        case 18: 
+        return gameTextArmazem.textExploreCaveLoading
+        case 19: 
+        return gameTextArmazem.textExploreCaveGold
+        case 20: 
+        return gameTextArmazem.textExploreCaveHp
+        case 21: 
+        return gameTextArmazem.textExploreCaveNothing
+        case 22: 
+        return gameTextArmazem.textDodgeTrue
+        case 23: 
+        return gameTextArmazem.textDodgeFalse
+        case 24: 
+        return gameTextArmazem.textTotalXp
     }
 }
