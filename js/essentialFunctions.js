@@ -189,6 +189,10 @@ export function loading(carre,i=0,n=0,hp = variaveis.hpCharacter.innerHTML){
 console.log(hp)
     i++;
     n++;
+    
+    variaveis.btnAll.map((el)=>{
+        addClass(el,"teste")
+    })
 
     variaveis.text.innerHTML =  carre
     console.log(carre)
@@ -201,8 +205,15 @@ console.log(hp)
     }
     else{
         if(n<8){
+            variaveis.btnAll.map((el)=>{
+                removeClass(el,"teste")
+            })
+            
             return loading(textArmazem(18),0,n) 
         }else{
+            variaveis.btnAll.map((el)=>{
+                removeClass(el,"teste")
+            })
             return  caveTreasures(hp)
         }
     }

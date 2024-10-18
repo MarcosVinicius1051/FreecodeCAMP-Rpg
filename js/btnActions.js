@@ -95,6 +95,8 @@ export function exploreCave(){
     variaveis.btnSlime.disabled = true
     variaveis.btnVillage.disabled = true
 
+    
+
     essencial.loading(textArmazem(18),0,0,variaveis.hpCharacter.innerHTML)
 
 }
@@ -170,11 +172,19 @@ export function characterAttack(type,demage,monsterDemag,monsterAtivoName){
             variaveis.btnDodge.disabled = true;
             variaveis.btnRun.disabled = true; 
 
+            variaveis.btnAll.map((el)=>{
+                essencial.addClass(el,"teste")
+            })
+
         setTimeout(()=>{
 
             variaveis.btnAttack.disabled = false; 
             variaveis.btnDodge.disabled = false;
             variaveis.btnRun.disabled = false; 
+
+            variaveis.btnAll.map((el)=>{
+                essencial.removeClass(el,"teste")
+            })
             
             CaveBtn() //arrumar esse sistema referente ao design do sistema XD 
 
@@ -201,6 +211,11 @@ function monsterAttack(type,demage,name){
             variaveis.btnAttack.disabled = true;
             variaveis.btnDodge.disabled = true;
             variaveis.btnRun.disabled = true;
+
+            variaveis.btnAll.map((el)=>{
+                essencial.addClass(el,"teste")
+            })
+
             setTimeout(()=>{
                 variaveis.text.innerHTML = textArmazem(24)  
             },2000)
@@ -210,6 +225,11 @@ function monsterAttack(type,demage,name){
                 variaveis.btnAttack.disabled = false;
                 variaveis.btnDodge.disabled = false;
                 variaveis.btnRun.disabled = false;
+
+                variaveis.btnAll.map((el)=>{
+                    essencial.removeClass(el,"teste")
+                })
+
                 script.statusETextoInicial();
 
                 essencial.removeClass(variaveis.containeractions,"MonsterOn");

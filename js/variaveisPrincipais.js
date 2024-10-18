@@ -3,6 +3,7 @@ export let xpCharacter = document.querySelector("#xp p");
 export let hpCharacter = document.querySelector("#hp p");
 export let goldCharacter = document.querySelector("#gold p");
 
+export let btnAll = [...document.querySelectorAll(".btn")]
 
 export let weapons = document.getElementById("weapon");
 
