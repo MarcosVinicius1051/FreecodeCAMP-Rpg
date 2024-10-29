@@ -1,6 +1,7 @@
 import * as variaveis from "./variaveisPrincipais.js"
 import {textosArmazenados as textArmazem, weaponsArmazem, weaponsDamege} from "./textos.js"
 import * as script from './script.js';
+import { monsterDemage } from "./monsters.js";
 
 // funções essenciais. 
 
@@ -43,7 +44,17 @@ switch (type){
 
 }
 }
+
+export function textoMudar(text,time){
+    setTimeout(() => {
+        addClass(text,"textoAparecer"); 
+    }, time);
+  
+    removeClass(text,"textoAparecer");
+}
+
 export function addClass(name,classe){
+    
     return name.classList.add(classe);
 }
 
@@ -80,7 +91,12 @@ export function perderHp(hp,type,demage,monsterName){
         }
         if(hp>0){
             hp = hp - demage; 
-            return variaveis.hpCharacter.innerHTML = hp;
+            addClass(variaveis.hpCharacter,"danoHp")
+            variaveis.hpCharacter.innerHTML = hp;
+            setTimeout(()=>{
+                removeClass(variaveis.hpCharacter,"danoHp")
+            },1000)
+            return 
         }
 
     }
@@ -91,32 +107,47 @@ export function perderHp(hp,type,demage,monsterName){
         }
         if(hp>0){
             hp = hp - demage; 
+            addClass(variaveis.monsterHp,"danoHp")
+            variaveis.monsterHp.innerHTML = hp;
+            setTimeout(()=>{
+                removeClass(variaveis.monsterHp,"danoHp")
+            },1000)
+            
+
             return variaveis.monsterHp.innerHTML = hp;
         }
     }
 }
 
 export function pagamento(type,gold){
+    let goldInicial = gold;
     console.log(gold)
     if(type == "slime"){
         xpAdd(type)
         gold = gold+40; 
-        return variaveis.goldCharacter.innerHTML = gold;
+        variaveis.goldCharacter.innerHTML = gold;
+        return gold-goldInicial;
     }
     if(type == "cano"){
         xpAdd(type)
         gold = gold+80; 
-        return variaveis.goldCharacter.innerHTML = gold;
+        variaveis.goldCharacter.innerHTML = gold;
+
+        return gold-goldInicial;
     }
     if(type == "dragon"){
         xpAdd(type)
         gold = gold+200; 
-        return variaveis.goldCharacter.innerHTML = gold;
+        variaveis.goldCharacter.innerHTML = gold;
+     
+        return gold-goldInicial;
     }
     if(type == "parFoda"){
         xpAdd("CaveExplorateGold")
         gold = gold+60
-        return variaveis.goldCharacter.innerHTML= gold
+        variaveis.goldCharacter.innerHTML = gold;
+        
+        return gold-goldInicial;
     }
 }
 
@@ -125,6 +156,7 @@ export function buyItems (gold,type,weapon,xp){
 
     if(type == "hp"){
         if(gold >=10){
+            playAudio(variaveis.spendGoldAudio);
 
             hpReturn = recuperarHp(parseInt(variaveis.hpCharacter.innerHTML));
 
@@ -144,6 +176,7 @@ export function buyItems (gold,type,weapon,xp){
             variaveis.text.innerHTML = textArmazem(4);
         }
         if(gold>=50){
+            playAudio(variaveis.spendGoldAudio);
             gold = gold - 50; 
             weapon =compraArmas(weapon);
             variaveis.goldCharacter.innerHTML = gold;
@@ -186,7 +219,7 @@ function compraArmas(weapon){
 
 // cave exploration
 export function loading(carre,i=0,n=0,hp = variaveis.hpCharacter.innerHTML){ 
-console.log(hp)
+
     i++;
     n++;
     
@@ -195,7 +228,6 @@ console.log(hp)
     })
 
     variaveis.text.innerHTML =  carre
-    console.log(carre)
     if(i<=4){
         setTimeout(() => {
             carre = carre + "."
@@ -205,15 +237,20 @@ console.log(hp)
     }
     else{
         if(n<8){
-            variaveis.btnAll.map((el)=>{
-                removeClass(el,"teste")
-            })
+            setTimeout(() => {
+                variaveis.btnAll.map((el)=>{
+                    removeClass(el,"teste")
+                })
+            }, 4500);
+            
             
             return loading(textArmazem(18),0,n) 
         }else{
-            variaveis.btnAll.map((el)=>{
-                removeClass(el,"teste")
-            })
+            setTimeout(() => {
+                variaveis.btnAll.map((el)=>{
+                    removeClass(el,"teste")
+                })
+            }, 4500);
             return  caveTreasures(hp)
         }
     }
@@ -225,6 +262,7 @@ function caveTreasures(hp){
    
     if (val%2 == 0){
         if(val%4 == 0){
+            playAudio(variaveis.caveWinAudio)
             pagamento("parFoda",parseInt(variaveis.goldCharacter.innerHTML));
             variaveis.text.innerHTML=textArmazem(19);
             setTimeout(() => {
@@ -235,6 +273,7 @@ function caveTreasures(hp){
                 variaveis.text.innerHTML = textArmazem(9);
             }, 3000);
         }else{
+            playAudio(variaveis.caveNothingAudio)
             variaveis.text.innerHTML=textArmazem(21);
             setTimeout(() => {
                 variaveis.btnExplore.disabled = false
@@ -245,7 +284,7 @@ function caveTreasures(hp){
             }, 3000)
         }
     }else{
-        console.log(hp)
+        playAudio(variaveis.caveLoseAudio)
         perderHp(hp,0,30,"armadilha")
         variaveis.text.innerHTML=textArmazem(20);
         setTimeout(() => {
@@ -256,4 +295,71 @@ function caveTreasures(hp){
             variaveis.text.innerHTML = textArmazem(9);
         }, 3000)
     }
+}
+
+let contador=0;
+
+export function playAudio( audio, time){
+   
+    audio.currentTime = 0.1
+    audio.volume = 0.5;
+
+    if(contador != 0){
+        audio.play();
+    }else{
+
+        audio.play();
+        setTimeout(()=>{
+            audio.pause();
+           
+        },2000)
+        contador++;
+    }
+    if(time){
+        audio.play();
+        setTimeout(()=>{
+            audio.pause();
+           
+        },time)
+    }
+
+}
+
+
+export function monsterAudioDead(name){
+    console.log(`nome; ${name}`);
+    switch(name){
+        case "slime":
+            playAudio(variaveis.slimeAudioDead);
+        break;
+        case "cano":
+            playAudio(variaveis.canoAudio);
+        break;
+        case "pombo":
+            playAudio(variaveis.pomboAudioDead);
+        break;
+    }
+}
+
+
+export function morteDoPombo(){
+    setTimeout(()=>{
+        variaveis.text.innerHTML = textArmazem(25)  
+    },2000)
+
+    
+    nEsconder(variaveis.imgPomboMorreu)
+    playAudio(variaveis.audioVitoriaFinal)
+        
+    variaveis.btnAttack.disabled = true;
+    variaveis.btnDodge.disabled = true;
+    variaveis.btnRun.disabled = true; 
+
+    variaveis.btnAll.map((el)=>{
+        addClass(el,"teste")
+    })
+    setTimeout(()=>{
+    esconder(variaveis.imgPomboMorreu);
+    },5000)
+
 }

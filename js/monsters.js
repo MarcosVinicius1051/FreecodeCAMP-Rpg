@@ -13,7 +13,7 @@ export function statusMonster(monsterName){
         variaveis.monsterHp.innerHTML = 200; 
         return monsterDemage = 30; 
     }
-    if(monsterName == "dragon"){
+    if(monsterName == "pombo"){
         variaveis.monsterName.innerHTML = monsterName;
         variaveis.monsterHp.innerHTML = 500; 
         return monsterDemage = 50; 

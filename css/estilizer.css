@@ -1,13 +1,85 @@
 @keyframes animator{
-0%{
-    box-shadow: 0px 0px 10px #4e0068;
- 
+    0%{
+        box-shadow: 0px 0px 10px #4e0068;
+    
+    }
+    100%{
+        box-shadow: 0px 0px 50px #4e0068;
+    }
 }
-100%{
-    box-shadow: 0px 0px 50px #4e0068;
+
+@keyframes dano{
+    0%{
+        transform: scale(1.0);
+    }
+    50%{
+        color: red;
+        transform: scale(0.6);
+    }
+    100%{
+        transform: scale(1.0);
+    }
 }
- 
+
+@keyframes texto{
+    0%{
+        background-color: rgb(38, 0, 110);
+        
+    }
+    50%{
+        background-color: rgb(143, 104, 218);;
+    }
+    100%{
+        background-color: rgb(38, 0, 110);
+    }
 }
+
+@keyframes animaçãoMorte{
+    0%{
+        opacity: 0;
+        width: 700px;
+    }
+    40%{
+        opacity: 1;
+        width: 1400px;
+    }
+    99%{
+        width: 1400px; 
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
+@keyframes animaçãovitoria{
+    0%{
+        opacity: 0;
+        width: 100px;
+        rotate: 0deg;
+    }
+    30%{
+        rotate: 80deg;
+    }
+    40%{
+        opacity: 1;
+        width: 300px;
+        rotate: 160deg;
+    }
+    60%{
+        rotate: 240deg;
+    }
+    80%{
+        rotate: 360deg;
+    }
+    99%{
+        width: 300px;
+        rotate: 100deg;
+    }
+    100%{
+        opacity: 0;
+    }
+}
+
 
 .btn:hover{
     background-color: #190021;
@@ -17,13 +89,36 @@
             transition: .3s;
     animation-name: animator;
     animation-duration: 1s;
-   
+    cursor: pointer;
 
 }
 
 
 .teste{
-    background-color: rgb(101, 5, 21);
+    background-color: rgb(101, 5, 21) !important ;
     border-color: rgb(101, 5, 21)!important;
 }
 
+.danoHp{
+    animation: dano;
+    transition: 1s;
+    animation-duration: 1s;
+}
+
+.textoAparecer{
+    
+    animation: texto;
+    animation-duration:0.7s;
+}
+
+.morreu img{
+    width: 1400px;
+    animation:animaçãoMorte ;
+    animation-duration: 5s;
+}
+
+.matoPombo img{
+    width: 300px;
+    animation: animaçãovitoria;
+    animation-duration: 4s;
+}

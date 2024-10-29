@@ -7,7 +7,7 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
 
     const gameTextArmazem = {
 
-        textInitial: `Bem vindo ao RPG MASCULO, sua missão é matar o dragão. \nMas vc esta muito fraco, então comece indo para a loja ou enfrentar monstros mais fracos na caverna!\n\nVocê possui em seu inventario: \nitem: ${weapons} \nouro: ${gold} `,
+        textInitial: `<p class= "textoInicio"> Bem vindo ao Kill the Pombo! <br>Sua missão é matar o Pombo Demoniaco! <br>Mas vc esta muito fraco, então comece indo para a loja ou enfrentar monstros mais fracos na caverna!\n\nVocê possui em seu inventario: <br>item: ${weapons} <br>ouro: ${gold}</p> `,
 
         textVillage: "você esta no centro da vila, para onde vai agora?",
 
@@ -29,7 +29,7 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
 
         textCavemonster: `Um ${monster} apareceu! ataque ou desvie!`,
 
-        textEffectiveAttackInmMonster: "o ataque acertou!, -x de vida do montro",
+        textEffectiveAttackInmMonster: "o ataque acertou!, -x de vida do monstro",
 
         textNoEffectiveAttackInMonster: "O slime desvivou!",
 
@@ -37,7 +37,7 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
 
         texMonsterCharacterAttackDodge: "você esquivou do ataque do slime!",
 
-        textDefeatMonster: `vc matou o ${monster}! vc ganhou 40 moedas!`,
+        textDefeatMonster: `vc matou o ${monster}! vc ganhou ${gold} moedas!`,
 
         textDefeatCharacter: `vc morreu para o ${monster}.`,
 
@@ -57,7 +57,9 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
 
         textDodgeFalse: `você não conseguiu desviar do ataque do ${monster}, você perdeu ${demage}hp`,
 
-        textTotalXp: `seu xp total foi: ${variaveis.xpCharacter.innerHTML}! Tente novamente em uma nova jornada!`
+        textTotalXp: `seu xp total foi: ${variaveis.xpCharacter.innerHTML}! Tente novamente em uma nova jornada!`,
+
+        textPomboDefeat: `Parabéns! você venceu o boss final!!, entretanto não há um premio final, pois o verdadeiro tesouro sãos os amigos que fazemos pelo caminho!\nps: eu poderia arrumar a animação... mas n quis`
 
 
     }
@@ -113,5 +115,7 @@ export function textosArmazenados(num,weapons,gold,monster,demage){
         return gameTextArmazem.textDodgeFalse
         case 24: 
         return gameTextArmazem.textTotalXp
+        case 25:
+        return gameTextArmazem.textPomboDefeat
     }
 }

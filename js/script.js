@@ -10,7 +10,7 @@ let monsterAtivoDemage;
 let monsterAtivoName;
 
 export function statusETextoInicial(){
-    variaveis.hpCharacter.innerHTML = '100'
+    variaveis.hpCharacter.innerHTML = '10'
     variaveis.xpCharacter.innerHTML = '0'
     variaveis.goldCharacter.innerHTML = '100'
     demageCharacter = 20; 
@@ -65,11 +65,12 @@ variaveis.btnCano.addEventListener("click",((evt)=>{
 
 variaveis.btnDragon.addEventListener("click",((evt)=>{
     monsterAtivoName=btnAction.dragonBtn();
-    monsterAtivoDemage = monster.statusMonster("dragon");
+    monsterAtivoDemage = monster.statusMonster("pombo");
 }));
 
 
 variaveis.btnAttack.addEventListener("click",((evt)=>{
+    
     btnAction.characterAttack(1, danos.demageCalculator(demageCharacter), danos.demageCalculator(monsterAtivoDemage), monsterAtivoName);
 }))
 
