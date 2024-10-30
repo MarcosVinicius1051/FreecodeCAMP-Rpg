@@ -82,8 +82,8 @@ export function perderHp(hp,type,demage,monsterName){
     hp = parseInt(hp);
     if(type == 0){
         if(hp-demage <= 0){
-            variaveis.hpCharacter.innerHTML = '0';
-            
+                variaveis.hpCharacter.innerHTML = '0';
+                
                 variaveis.text.innerHTML = textArmazem(16,false,false,monsterName);
             
 

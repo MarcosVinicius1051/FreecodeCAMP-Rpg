@@ -10,7 +10,7 @@ let monsterAtivoDemage;
 let monsterAtivoName;
 
 export function statusETextoInicial(){
-    variaveis.hpCharacter.innerHTML = '10'
+    variaveis.hpCharacter.innerHTML = '100'
     variaveis.xpCharacter.innerHTML = '0'
     variaveis.goldCharacter.innerHTML = '100'
     demageCharacter = 20; 

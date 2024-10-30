@@ -254,6 +254,10 @@ function monsterAttack(type,demage,name){
     essencial.playAudio(variaveis.playerAudioDemage);
 
     if(hpReturnPlayer<=0){
+        
+            essencial.esconder(variaveis.btnAttack);
+            essencial.esconder(variaveis.btnDodge);
+            essencial.esconder(variaveis.btnRun);
 
             essencial.playAudio(variaveis.playerAudioDead)
 
@@ -268,6 +272,7 @@ function monsterAttack(type,demage,name){
             
            essencial.nEsconder(variaveis.imgMorte)
            essencial.playAudio(variaveis.vocêMorreuAudio, 8000)
+
 
             variaveis.btnAttack.disabled = true;
             variaveis.btnDodge.disabled = true;
@@ -291,9 +296,7 @@ function monsterAttack(type,demage,name){
                 
                 essencial.removeClass(variaveis.containeractions,"MonsterOn");
                 essencial.addClass(variaveis.containerMonster,"esconder");
-                essencial.esconder(variaveis.btnAttack);
-                essencial.esconder(variaveis.btnRun);
-                essencial.esconder(variaveis.btnDodge);
+
                 
 
                 essencial.nEsconder(variaveis.btnVillage);
